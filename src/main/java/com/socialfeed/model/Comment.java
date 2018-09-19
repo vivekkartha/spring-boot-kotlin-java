@@ -13,7 +13,7 @@ public class Comment {
     @GeneratedValue(generator = "comment_seq")
     private Long id;
     private String message;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id", referencedColumnName = "post_id",nullable = false)
     @JsonBackReference
     private FeedPost post;

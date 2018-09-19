@@ -8,6 +8,7 @@ public class UserAccount {
     @Id
     @SequenceGenerator(name = "user_sequence")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @Column(name = "user_id")
     private Long id;
     @Size(max = 100)
     private String name;

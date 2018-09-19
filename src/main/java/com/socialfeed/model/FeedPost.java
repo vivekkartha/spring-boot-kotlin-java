@@ -13,7 +13,7 @@ public class FeedPost {
     private Long id;
     private String post;
     private String likes;
-    @OneToMany(mappedBy = "post", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "post", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Comment> comment;
 
     public Long getId() {
