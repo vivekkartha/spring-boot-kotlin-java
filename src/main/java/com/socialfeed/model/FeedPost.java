@@ -13,8 +13,13 @@ public class FeedPost {
     private Long id;
     private String post;
     private String likes;
+
     @OneToMany(mappedBy = "post", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Comment> comment;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",referencedColumnName = "user_id",nullable = false)
+    private UserAccount user;
 
     public Long getId() {
         return id;
@@ -39,7 +44,6 @@ public class FeedPost {
     public void setLikes(String likes) {
         this.likes = likes;
     }
-
 
     public List<Comment> getComment() {
         return comment;

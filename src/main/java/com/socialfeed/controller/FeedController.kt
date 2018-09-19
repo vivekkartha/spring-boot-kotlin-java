@@ -15,19 +15,24 @@ class FeedController {
     @Autowired
     private lateinit var commentRepository: CommentRepository
 
-    @PostMapping("/makePost")
+    //TODO: Insert user obj to feedpost(back ref)
+    @PostMapping("/{userId}/makePost")
     fun createPost(@RequestBody post: FeedPost) = feedRepository.save(post)
 
     @PostMapping("/{postId}/createComment")
-    fun createComment(@RequestBody comment: Comment, @PathVariable("postId") postId: Long) =
-            feedRepository.findById(postId).map { post ->
-                comment.post = post
-                commentRepository.save(comment)
-            }.orElseThrow { ResourceNotFoundException("$postId not found!") }
+    fun createComment(@RequestBody comment: Comment, @PathVariable("postId") postId: Long): Comment {
+        return feedRepository.findById(postId).map { post ->
+            comment.post = post
+            commentRepository.save(comment)
+        }.orElseThrow { ResourceNotFoundException("$postId not found!") }
+    }
 
     @PostMapping("/showAll")
-    fun showAllPosts() = feedRepository.findAll()
+    fun showAllPosts(): List<FeedPost> = feedRepository.findAll()
 
-    @GetMapping(value = "/getComments", params = ["postId"])
-    fun getCommentsForPostId(postId: Long) = commentRepository.findByPostId(postId)
+    @GetMapping(value = ["/getComments"], params = ["postId"])
+    fun getCommentsForPostId(postId: Long): List<Comment> = commentRepository.findByPostId(postId)
+
+    @GetMapping(value = ["/getPosts"],params = ["userId"])
+    fun getPostsByUserId(userId:Long): List<FeedPost> = feedRepository.findByUserId(userId)
 }

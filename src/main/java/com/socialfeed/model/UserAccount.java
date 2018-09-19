@@ -2,6 +2,7 @@ package com.socialfeed.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class UserAccount {
@@ -13,6 +14,9 @@ public class UserAccount {
     @Size(max = 100)
     private String name;
     private String password;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<FeedPost> feedPosts;
 
     public String getPassword() {
         return password;
@@ -32,5 +36,13 @@ public class UserAccount {
 
     public boolean isValidUser() {
         return name != null && password != null;
+    }
+
+    public List<FeedPost> getFeedPosts() {
+        return feedPosts;
+    }
+
+    public void setFeedPosts(List<FeedPost> feedPosts) {
+        this.feedPosts = feedPosts;
     }
 }

@@ -31,4 +31,5 @@ public class AccountController {
     public String status() {
         return "Social feed is live!";
     }
+
 }
