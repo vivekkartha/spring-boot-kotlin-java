@@ -52,4 +52,12 @@ public class FeedPost {
     public void setComment(List<Comment> comment) {
         this.comment = comment;
     }
+
+    public UserAccount getUser() {
+        return user;
+    }
+
+    public void setUser(UserAccount user) {
+        this.user = user;
+    }
 }
