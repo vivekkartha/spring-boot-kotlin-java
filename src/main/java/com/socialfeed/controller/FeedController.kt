@@ -33,6 +33,6 @@ class FeedController {
     @GetMapping(value = ["/getComments"], params = ["postId"])
     fun getCommentsForPostId(postId: Long): List<Comment> = commentRepository.findByPostId(postId)
 
-    @GetMapping(value = ["/getPosts"],params = ["userId"])
-    fun getPostsByUserId(userId:Long): List<FeedPost> = feedRepository.findByUserId(userId)
+    @GetMapping(value = ["/getPosts"], params = ["userId"])
+    fun getPostsByUserId(userId: Long): List<FeedPost> = feedRepository.findByUserId(userId)
 }
